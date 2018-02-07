@@ -1,5 +1,7 @@
 package model
 
+import "errors"
+
 // User model that represents user attributes
 type User struct {
 	Id        int    `json:"id"`
@@ -10,7 +12,16 @@ type User struct {
 	isAdult   bool   `json:"is_adult"`
 }
 
-func (u *User) SetAge(age int) {
+var ErrInvalidAge = errors.New("Age cannot be negative")
+
+func (u *User) SetAge(age int) (err error) {
+	err = nil
+
+	if age < 0 {
+		err = ErrInvalidAge
+		return
+	}
+
 	u.age = age
 
 	if age >= 18 {
@@ -18,6 +29,8 @@ func (u *User) SetAge(age int) {
 	} else {
 		u.isAdult = false
 	}
+
+	return
 }
 
 func (u *User) GetAge() int { return u.age }

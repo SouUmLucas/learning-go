@@ -8,7 +8,7 @@ func main() {
 	currentOs := runtime.GOOS
 	currentGoRoot := runtime.GOROOT
 
-	fmt.Printf("Current Go root: %+q", currentGoRoot)
+	fmt.Printf("Current Go root: %s", currentGoRoot)
 
 	switch currentOs {
 	case "darwin":
